@@ -30,6 +30,7 @@ html {
 .container .part3 {
   width: 60%;
 }
+/*par1*/
 .container .part1 .rating li {
   float: left;
   list-style: none;
@@ -40,6 +41,9 @@ html {
 .container .part1 .rating .selected {
   background: url("../images/shining.png");
 }
+/*part1 ends*/
+
+/*part2 */
 .section .main {
   width: 100%;
   height: 100%;
@@ -69,6 +73,11 @@ html {
   position: absolute;
   display: none;
 }
+
+/*part2 ends*/
+
+/*part3*/
+
 .part2 .banner {
   margin: 0 auto;
   margin-top: 80px;

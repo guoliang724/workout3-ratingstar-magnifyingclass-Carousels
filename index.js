@@ -107,3 +107,132 @@
   }
 })();
 /*part2 ends */
+
+/*part3*/
+(function () {
+  config = {
+    imgWidth: 520,
+    imgHeight: 280,
+    currentIndex: 0,
+    bannerDiv: document.querySelector(".banner"),
+    imgDiv: document.querySelector(".banner .images"),
+    dotDiv: document.querySelector(".banner .dots"),
+    arrowDiv: document.querySelector(".banner .arrows"),
+  };
+  config.imgNumber = config.imgDiv.children.length;
+
+  /*intial sizes */
+  function initalDots() {
+    for (var i = 0; i < config.imgNumber; i++) {
+      var span = document.createElement("span");
+      config.dotDiv.appendChild(span);
+    }
+    intialSelected();
+  }
+
+  /*intial selected dot */
+  function intialSelected() {
+    for (var i = 0; i < config.imgNumber; i++) {
+      if (i === config.currentIndex) {
+        config.dotDiv.children[i].classList.add("selected");
+      } else {
+        config.dotDiv.children[i].classList.remove("selected");
+      }
+    }
+  }
+  /*initial the total size of pics */
+  function initalSize() {
+    config.imgDiv.style.width = config.imgNumber * config.imgWidth + "px";
+  }
+
+  /*initial positon */
+  function intialPositon() {
+    config.imgDiv.style.marginLeft =
+      -config.currentIndex * config.imgWidth + "px";
+  }
+
+  /* the function of switching pic */
+  function switchPic(index) {
+    if (index == config.currentIndex) {
+      return;
+    }
+    config.imgDiv.style.marginLeft = -index * config.imgWidth + "px";
+    /*set index to be equal to currentIndex */
+    config.currentIndex = index;
+  }
+
+  /*register click event on left and right button */
+  config.arrowDiv.onclick = function (e) {
+    if (e.target.classList.contains("left")) {
+      var index = config.currentIndex - 1;
+      if (index < 0) {
+        index = config.imgNumber - 1;
+        config.imgDiv.classList.add("faster");
+      } else {
+        console.log("enter else");
+        config.imgDiv.classList.remove("faster");
+      }
+    } else {
+      var index = config.currentIndex + 1;
+      if (index > config.imgNumber - 1) {
+        index = 0;
+        config.imgDiv.classList.add("faster");
+      } else {
+        config.imgDiv.classList.remove("faster");
+      }
+    }
+    switchPic(index);
+    config.currentIndex = index;
+    intialSelected();
+  };
+
+  /*register click event on dot */
+  config.dotDiv.onclick = function (e) {
+    if (e.target.tagName === "SPAN") {
+      var index = Array.from(config.dotDiv.children).indexOf(e.target);
+      switchPic(index);
+      config.currentIndex = index;
+      intialSelected();
+    }
+  };
+  /*automatically rolling */
+  function rolling() {
+    stopRolling();
+    config.timer = setInterval(function () {
+      var index = config.currentIndex;
+      index++;
+      if (index == config.imgNumber - 1) {
+        index = 0;
+        config.imgDiv.classList.add("faster");
+      } else {
+        config.imgDiv.classList.remove("faster");
+      }
+      switchPic(index);
+      intialSelected();
+    }, 1000);
+  }
+  /*stop rolling */
+  function stopRolling() {
+    clearInterval(config.timer);
+    config.timer = null;
+  }
+
+  /* register a move in/out event*/
+  config.bannerDiv.onmouseenter = function () {
+    stopRolling();
+  };
+  config.bannerDiv.onmouseleave = function () {
+    rolling();
+  };
+
+  /* intial all */
+  function intialAll() {
+    initalSize();
+    intialPositon();
+    initalDots();
+    rolling();
+  }
+  intialAll();
+})();
+
+/* part3 ends*/

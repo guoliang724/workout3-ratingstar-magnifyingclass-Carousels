@@ -67,4 +67,62 @@ html {
   border: 1px solid black;
   background: rgba(255, 184, 153, 0.5);
   position: absolute;
+  display: none;
+}
+.part2 .banner {
+  margin: 0 auto;
+  margin-top: 80px;
+  border: 1px solid black;
+  width: 520px;
+  height: 280px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+.banner .images {
+  transition: all linear 0.7s;
+}
+.banner div.faster {
+  transition: none;
+}
+.banner .images img {
+  float: left;
+  cursor: pointer;
+}
+.banner .dots {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.3);
+  left: calc(50% - 30px);
+  bottom: 25px;
+  border-radius: 10px;
+}
+.banner .dots span {
+  float: left;
+  width: 12px;
+  height: 12px;
+  padding: 4px;
+  margin: 4px;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.banner .item {
+  position: absolute;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 30px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+.banner div.left {
+  top: calc(50% - 15px);
+  left: 10px;
+}
+.banner div.right {
+  top: calc(50% - 15px);
+  right: 10px;
+}
+.banner .dots span.selected {
+  background-color: orange;
 }
